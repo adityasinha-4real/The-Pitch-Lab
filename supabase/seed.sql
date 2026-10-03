@@ -1,4 +1,4 @@
--- Nutmeg Arena seed. Dates are relative to "today" in arena time (IST),
+-- The Pitch Lab seed. Dates are relative to "today" in arena time (IST),
 -- so the grid always has a realistic mix of booked, held and blocked slots.
 
 create or replace function pg_temp.at_local(p_day int, p_hour int) returns timestamptz

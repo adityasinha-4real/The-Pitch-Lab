@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <LogoMark />
-            <span className="font-display text-2xl font-black uppercase">Nutmeg Arena</span>
+            <span className="font-display text-2xl font-black uppercase">The Pitch Lab</span>
           </div>
           <p className="max-w-sm text-sm text-muted">
             Three floodlit turfs, bookable by the hour. Hold a slot for five minutes, pay, and split it with the squad.

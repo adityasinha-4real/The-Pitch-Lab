@@ -16,10 +16,10 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("group inline-flex min-h-11 items-center gap-2.5 rounded-xl", className)} aria-label="Nutmeg Arena home">
+    <Link href="/" className={cn("group inline-flex min-h-11 items-center gap-2.5 rounded-xl", className)} aria-label="The Pitch Lab home">
       <LogoMark className="transition-transform duration-300 ease-out-quint group-hover:-rotate-6" />
       <span className="font-display text-[1.6rem] font-black uppercase leading-none tracking-wide">
-        Nutmeg<span className="text-accent-fg"> Arena</span>
+        The Pitch<span className="text-accent-fg"> Lab</span>
       </span>
     </Link>
   );

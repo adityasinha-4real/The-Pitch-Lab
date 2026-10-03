@@ -106,7 +106,7 @@ function MockCheckout({
       <DialogContent data-testid="mock-checkout">
         <DialogHeader>
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-held">Test mode · no real money</p>
-          <DialogTitle>Nutmeg Pay</DialogTitle>
+          <DialogTitle>Pitch Lab Pay</DialogTitle>
           <DialogDescription>{config?.description}</DialogDescription>
         </DialogHeader>
         <div className="flex items-baseline justify-between rounded-2xl bg-surface-2 px-4 py-3">

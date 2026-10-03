@@ -1,5 +1,5 @@
 /**
- * Arena clock. Nutmeg Arena runs on Asia/Kolkata: UTC+05:30 all year (no DST),
+ * Arena clock. The Pitch Lab runs on Asia/Kolkata: UTC+05:30 all year (no DST),
  * so a fixed offset is exact. A "date key" is a local calendar date, YYYY-MM-DD.
  */
 export const ARENA_TZ = "Asia/Kolkata";

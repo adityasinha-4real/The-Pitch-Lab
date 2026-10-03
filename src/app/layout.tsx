@@ -17,9 +17,9 @@ const body = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", d
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: { default: "Nutmeg Arena — Book a floodlit turf", template: "%s · Nutmeg Arena" },
+  title: { default: "The Pitch Lab — Book a floodlit turf", template: "%s · The Pitch Lab" },
   description: "Book five- and seven-a-side football turfs by the hour. Hold a slot, pay, split it with your squad, or find players for an open game.",
-  applicationName: "Nutmeg Arena",
+  applicationName: "The Pitch Lab",
 };
 
 export const viewport: Viewport = {

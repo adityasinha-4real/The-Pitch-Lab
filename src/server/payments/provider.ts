@@ -30,7 +30,7 @@ export interface PaymentProvider {
   checkoutConfig(order: Order, ctx: { description: string; email?: string; name?: string }): CheckoutConfig;
 }
 
-const MERCHANT = "Nutmeg Arena";
+const MERCHANT = "The Pitch Lab";
 
 /** Razorpay over its REST API (test or live keys). */
 export class RazorpayProvider implements PaymentProvider {

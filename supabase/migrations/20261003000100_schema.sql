@@ -1,4 +1,4 @@
--- Nutmeg Arena: core schema.
+-- The Pitch Lab: core schema.
 create extension if not exists btree_gist with schema extensions;
 
 create type public.turf_format as enum ('5s', '7s');

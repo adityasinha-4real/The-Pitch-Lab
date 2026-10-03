@@ -1,4 +1,4 @@
-# Nutmeg Arena — Specification
+# The Pitch Lab — Specification
 
 A football turf booking web app. A box is ticked only after the test that proves it passes.
 The proving test is named after each item (`unit:` = Vitest, `e2e:` = Playwright, `script:` = verify step).

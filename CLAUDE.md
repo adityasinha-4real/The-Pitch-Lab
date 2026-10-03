@@ -1,4 +1,4 @@
-# Nutmeg Arena — working notes
+# The Pitch Lab — working notes
 
 Football turf booking app. Read `SPEC.md` (checklist) and `DECISIONS.md` (why things are the way they are) before changing behaviour.
 
