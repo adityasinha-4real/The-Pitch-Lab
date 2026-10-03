@@ -21,7 +21,8 @@ export async function requestMagicLink(_prev: MagicLinkState, formData: FormData
   if (!parsed.success) return { status: "error", message: parsed.error.issues[0]?.message ?? "Enter a valid email address" };
   const { email } = parsed.data;
   const next = safeNext(parsed.data.next, "/");
-  if (!rateLimit(`magic:${email}`, 5, 10 * 60_000)) {
+  // The e2e server signs the same admin in many times; the limiter stands down only there (DECISIONS D13).
+  if (!env.testHooks && !rateLimit(`magic:${email}`, 5, 10 * 60_000)) {
     return { status: "error", message: "Too many links requested. Wait a few minutes and try again." };
   }
   const origin = await requestOrigin();

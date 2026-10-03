@@ -46,32 +46,33 @@ test.describe("slot grid", () => {
 
   test("keyboard: arrow keys move through the grid, Enter selects", async ({ page }) => {
     await login(page, newEmail("keys"));
-    await openTurf(page, "rabona-ridge", 5);
+    // Panenka Yard, day 6: no other spec books here. It opens at 7 AM, closes 11 PM.
+    await openTurf(page, "panenka-yard", 6);
     const grid = page.getByTestId("slot-grid");
     const first = grid.getByRole("radio").first();
     await first.focus();
     const id = () => page.evaluate(() => document.activeElement?.getAttribute("data-testid"));
-    expect(await id()).toBe("slot-6");
+    expect(await id()).toBe("slot-7");
 
     await page.keyboard.press("ArrowRight");
-    expect(await id()).toBe("slot-7");
+    expect(await id()).toBe("slot-8");
     await page.keyboard.press("ArrowLeft");
-    expect(await id()).toBe("slot-6");
+    expect(await id()).toBe("slot-7");
 
     const cols = await grid.evaluate((g) => getComputedStyle(g).gridTemplateColumns.split(" ").length);
     await page.keyboard.press("ArrowDown");
-    expect(await id()).toBe(`slot-${6 + cols}`);
+    expect(await id()).toBe(`slot-${7 + cols}`);
     await page.keyboard.press("End");
-    expect(await id()).toBe("slot-23");
+    expect(await id()).toBe("slot-22");
     await page.keyboard.press("Home");
-    expect(await id()).toBe("slot-6");
+    expect(await id()).toBe("slot-7");
 
     // Only the focused slot is in the tab order (roving tabindex).
     await expect(grid.locator('[tabindex="0"]')).toHaveCount(1);
 
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("Enter");
-    await expect(page.getByTestId("slot-7")).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByTestId("slot-8")).toHaveAttribute("aria-checked", "true");
 
     // Date strip is arrow-navigable too.
     await page.getByTestId("date-strip").getByRole("radio", { checked: true }).focus();
