@@ -74,3 +74,18 @@ If `TEST_DATABASE_URL` is set, the same test runs on two real Postgres connectio
 
 ## D15 — shadcn/ui
 Components are written in shadcn's structure (`components.json`, `src/components/ui/*`, Radix primitives + `cva`) but restyled to the scoreboard/pitch language rather than generated with the default look.
+
+## D16 — "Big Shoulders Display" is now the variable "Big Shoulders"
+Google merged the Display/Text cuts into one variable family with an optical-size axis. We load `Big_Shoulders` with the `opsz` axis and set `font-variation-settings: "opsz" 72` in the `font-display` utility, which is the Display cut.
+
+## D17 — Database boots in `instrumentation.ts`
+Booting PGlite lazily inside the first render made that response fail (`ArrayBuffer is not detachable`, a WASM-memory buffer reaching the response stream). The DB now boots at server start, which is also where the local cleanup interval lives. Node-only code sits in `instrumentation-node.ts` so the edge bundle stays clean.
+
+## D18 — No root `loading.tsx`
+A root loading boundary wrapped every page in Suspense, so `notFound()` streamed with HTTP 200 and same-route search-param navigations (admin tabs) were dropped. Skeletons live in route segments instead (`/turfs`, `/turfs/[slug]`, `/games`, `/bookings`); admin and checkout 404 properly.
+
+## D19 — Cross-bundle singletons are compared by name
+Route handlers and server actions are separate bundles, so a provider stored on `globalThis` by one fails `instanceof` in the other. The mock-complete route checks `provider.name === "mock"`.
+
+## D20 — Split payers don't need an account
+Anyone holding the split link can pay a seat (the link is the capability: a v4 UUID, 122 random bits). Seat claims are rate-limited per IP and a claimed seat is reserved for 10 minutes while its payment is in flight.

@@ -12,7 +12,6 @@ import { BlockBoard } from "./block-board";
 import { PricingEditor } from "./pricing-editor";
 
 export const metadata: Metadata = { title: "Admin", robots: { index: false } };
-export const dynamic = "force-dynamic";
 
 const TABS = [
   { value: "overview", label: "Overview" },

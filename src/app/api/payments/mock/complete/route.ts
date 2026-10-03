@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { getPaymentProvider } from "@/server/payments";
-import { MockPaymentProvider } from "@/server/payments/provider";
+import type { MockPaymentProvider } from "@/server/payments/provider";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -14,8 +14,10 @@ const body = z.object({ orderId: z.string().regex(/^order_mock_[a-f0-9]+$/) });
  * browser gets no say in whether the booking is confirmed.
  */
 export async function POST(request: NextRequest) {
-  const provider = getPaymentProvider();
-  if (!(provider instanceof MockPaymentProvider)) return NextResponse.json({ error: "not_found" }, { status: 404 });
+  // Compare by name, not instanceof: route handlers and server actions are separate bundles.
+  const active = getPaymentProvider();
+  if (active.name !== "mock") return NextResponse.json({ error: "not_found" }, { status: 404 });
+  const provider = active as MockPaymentProvider;
   const parsed = body.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   const order = provider.getOrder(parsed.data.orderId);

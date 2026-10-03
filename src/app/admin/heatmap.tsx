@@ -11,11 +11,11 @@ export function Heatmap({ cells }: { cells: HeatCell[] }) {
 
   return (
     <div className="mt-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Occupancy heatmap, scrolls sideways">
-      <table className="w-full min-w-[720px] border-separate border-spacing-1" data-testid="heatmap">
+      <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-1" data-testid="heatmap">
         <caption className="sr-only">Percentage of turf-hours booked by weekday and hour</caption>
         <thead>
           <tr>
-            <td />
+            <td className="w-12" />
             {hours.map((h) => (
               <th key={h} scope="col" className="pb-1 text-[0.65rem] font-semibold text-muted">
                 {h % 3 === 0 ? formatHour(h).replace(" ", "") : <span className="sr-only">{formatHour(h)}</span>}
@@ -36,13 +36,13 @@ export function Heatmap({ cells }: { cells: HeatCell[] }) {
                   <td
                     key={h}
                     title={`${DAY[dow]} ${formatHour(h)}: ${pct}% booked`}
-                    className="h-9 rounded-md text-center align-middle text-[0.6rem] font-bold"
+                    className="h-9 rounded-md text-center align-middle"
                     style={{
                       background: pct ? `color-mix(in oklab, var(--accent) ${18 + pct * 0.82}%, var(--surface-2))` : "var(--surface-2)",
-                      color: pct >= 50 ? "var(--accent-ink)" : "var(--muted)",
                     }}
                   >
-                    <span className="num">{pct ? pct : ""}</span>
+                    {/* Figures sit on a surface chip so they keep contrast at every intensity. */}
+                    {pct > 0 && <span className="num rounded bg-surface px-1 text-[0.65rem] font-bold text-text">{pct}</span>}
                     <span className="sr-only">{pct ? "% booked" : "0% booked"}</span>
                   </td>
                 );

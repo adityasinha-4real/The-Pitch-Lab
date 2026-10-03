@@ -270,7 +270,7 @@ export function SlotPicker({
                   {dateLabels[date]} · <span className="num font-semibold text-text">{formatINR(selected.pricePaise ?? 0)}</span>
                 </p>
               </div>
-              <div className="w-48 shrink-0">{action}</div>
+              <div className="shrink-0">{action}</div>
             </div>
           </motion.div>
         )}
@@ -307,6 +307,7 @@ function SlotCell({
       data-state={slot.state}
       data-mine={slot.isMine || undefined}
       data-testid={`slot-${slot.hour}`}
+      data-start={slot.startAt}
       aria-checked={selected}
       aria-disabled={!selectable}
       aria-label={aria}

@@ -26,6 +26,15 @@ const LINKS = [
   { href: "/bookings", label: "My bookings" },
 ];
 
+/** POST to the sign-out route. Done imperatively because the menu unmounts as the item is selected. */
+function signOut() {
+  const form = document.createElement("form");
+  form.method = "post";
+  form.action = "/auth/signout";
+  document.body.appendChild(form);
+  form.submit();
+}
+
 function initials(user: NonNullable<NavUser>) {
   const source = user.name?.trim() || user.email;
   return source
@@ -107,13 +116,9 @@ export function HeaderNav({ user }: { user: NavUser }) {
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
-            <form action="/auth/signout" method="post">
-              <DropdownMenuItem asChild>
-                <button type="submit" className="w-full">
-                  <LogOut /> Sign out
-                </button>
-              </DropdownMenuItem>
-            </form>
+            <DropdownMenuItem onSelect={signOut}>
+              <LogOut /> Sign out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (

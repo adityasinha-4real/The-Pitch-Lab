@@ -24,10 +24,19 @@ export function TurfArt({ slug, className, title }: { slug: string; className?: 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className={cn("block size-full", className)} role={title ? "img" : undefined} aria-hidden={title ? undefined : true} aria-label={title}>
       <defs>
-        <radialGradient id={`${id}-flood`} cx="50%" cy="0%" r="75%">
-          <stop offset="0%" stopColor="var(--art-light)" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="var(--art-light)" stopOpacity="0" />
-        </radialGradient>
+        {(
+          [
+            ["tl", "0", "0"],
+            ["tr", "1", "0"],
+            ["bl", "0", "1"],
+            ["br", "1", "1"],
+          ] as const
+        ).map(([k, gx, gy]) => (
+          <radialGradient key={k} id={`${id}-flood-${k}`} cx={gx} cy={gy} r="0.7">
+            <stop offset="0%" stopColor="var(--art-light)" stopOpacity="0.32" />
+            <stop offset="100%" stopColor="var(--art-light)" stopOpacity="0" />
+          </radialGradient>
+        ))}
         <clipPath id={`${id}-clip`}>
           <rect x={pitch.x} y={pitch.y} width={pitch.w} height={pitch.h} rx="6" />
         </clipPath>
@@ -88,7 +97,10 @@ export function TurfArt({ slug, className, title }: { slug: string; className?: 
         <rect x={pitch.x - 8} y={pitch.y - 8} width={pitch.w + 16} height={pitch.h + 16} rx="12" fill="none" stroke="var(--art-board)" strokeWidth="8" />
       )}
 
-      {/* Floodlight pylons and their wash */}
+      {/* Floodlight wash from each corner, then the pylons */}
+      {(["tl", "tr", "bl", "br"] as const).map((k) => (
+        <rect key={k} width={w} height={h} fill={`url(#${id}-flood-${k})`} />
+      ))}
       {[
         [pitch.x - 26, pitch.y - 26],
         [pitch.x + pitch.w + 26, pitch.y - 26],
@@ -96,7 +108,6 @@ export function TurfArt({ slug, className, title }: { slug: string; className?: 
         [pitch.x + pitch.w + 26, pitch.y + pitch.h + 26],
       ].map(([x, y]) => (
         <g key={`${x}-${y}`}>
-          <circle cx={x} cy={y} r="90" fill={`url(#${id}-flood)`} opacity="0.3" />
           <rect x={(x as number) - 7} y={(y as number) - 7} width="14" height="14" rx="3" fill="var(--art-pylon)" />
           <circle cx={x} cy={y} r="3.5" fill="var(--art-light)" />
         </g>
