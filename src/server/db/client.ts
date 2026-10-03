@@ -7,7 +7,7 @@ import type { PgError, SqlClient, SqlRunner } from "./sql";
  * seeds a fresh database; Supabase mode connects to DATABASE_URL.
  * Stored on globalThis so dev-server module reloads share one database.
  */
-const g = globalThis as unknown as { __nutmegSql?: Promise<SqlClient>; __nutmegOnBoot?: Array<() => void> };
+const g = globalThis as unknown as { __nutmegSql?: Promise<SqlClient> };
 
 async function boot(): Promise<SqlClient> {
   const { env } = await import("../env");
@@ -20,7 +20,6 @@ async function boot(): Promise<SqlClient> {
   if (dir !== "memory") await mkdir(dir, { recursive: true });
   const sql = await openPglite(dir);
   await migrateLocal(sql, { seed: true });
-  for (const fn of g.__nutmegOnBoot ?? []) fn();
   return sql;
 }
 
@@ -35,11 +34,6 @@ export function getSql(): Promise<SqlClient> {
 /** Tests inject their own client (a fresh PGlite per suite). */
 export function setSqlClient(client: SqlClient | undefined) {
   g.__nutmegSql = client ? Promise.resolve(client) : undefined;
-}
-
-/** Run something once the local database has booted (e.g. the cleanup interval). */
-export function onLocalBoot(fn: () => void) {
-  (g.__nutmegOnBoot ??= []).push(fn);
 }
 
 export type Actor = { id: string; email?: string | null } | null;

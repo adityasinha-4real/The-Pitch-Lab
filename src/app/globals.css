@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ tokens
+   Light = matchday daytime, chalk on grass. Dark = floodlit night match. */
+:root {
+  --bg: #f6f5ef;
+  --surface: #ffffff;
+  --surface-2: #ecebe3;
+  --surface-3: #e2e1d7;
+  --accent: #0f7a3d;
+  --accent-fg: #0b6b35;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(15 122 61 / 0.1);
+  --text: #0e1a12;
+  --muted: #4a5a4f;
+  --line: rgb(15 122 61 / 0.14);
+  --line-strong: rgb(14 26 18 / 0.16);
+  --stripe: rgb(15 122 61 / 0.035);
+  --held: #9a5b00;
+  --held-soft: rgb(154 91 0 / 0.1);
+  --danger: #b42318;
+  --danger-soft: rgb(180 35 24 / 0.08);
+  --ring: #0f7a3d;
+  --glow: rgb(255 214 120 / 0.35);
+  --glow-2: rgb(15 122 61 / 0.12);
+  --shadow: 0 1px 2px rgb(14 26 18 / 0.06), 0 8px 24px -12px rgb(14 26 18 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(14 26 18 / 0.06), 0 18px 40px -16px rgb(14 26 18 / 0.28);
+  --grain-opacity: 0.05;
+  --art-ground: #dfe6d6;
+  --art-pitch: #2f8a4c;
+  --art-pitch-2: #36985a;
+  --art-chalk: rgb(255 255 255 / 0.92);
+  --art-board: #1d3b27;
+  --art-pylon: #33453a;
+  --art-light: #fff4c7;
+  --art-skyline: #b8c6b5;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0b120d;
+  --surface: #121c15;
+  --surface-2: #1a271e;
+  --surface-3: #223228;
+  --accent: #c6ff3d;
+  --accent-fg: #c6ff3d;
+  --accent-ink: #0b120d;
+  --accent-soft: rgb(198 255 61 / 0.1);
+  --text: #eef3ec;
+  --muted: #9db0a2;
+  --line: rgb(238 243 236 / 0.08);
+  --line-strong: rgb(238 243 236 / 0.16);
+  --stripe: rgb(238 243 236 / 0.018);
+  --held: #ffb547;
+  --held-soft: rgb(255 181 71 / 0.12);
+  --danger: #ff6b5e;
+  --danger-soft: rgb(255 107 94 / 0.1);
+  --ring: #c6ff3d;
+  --glow: rgb(214 255 140 / 0.16);
+  --glow-2: rgb(198 255 61 / 0.08);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 22px 44px -18px rgb(0 0 0 / 0.8), 0 0 0 1px rgb(198 255 61 / 0.08);
+  --grain-opacity: 0.07;
+  --art-ground: #08100a;
+  --art-pitch: #12361f;
+  --art-pitch-2: #164026;
+  --art-chalk: rgb(238 243 236 / 0.75);
+  --art-board: #24352a;
+  --art-pylon: #2c3d31;
+  --art-light: #e8ffb8;
+  --art-skyline: #142019;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-held: var(--held);
+  --color-held-soft: var(--held-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ring: var(--ring);
+  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: var(--shadow);
+  --shadow-lift: var(--shadow-lift);
+  --radius-card: 1.25rem;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+/* ------------------------------------------------------------------ utilities */
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Big Shoulders at its display optical size: the scoreboard cut. */
+@utility font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-optical-sizing: none;
+  letter-spacing: 0.01em;
+}
+
+@utility pitch-stripes {
+  background-image: repeating-linear-gradient(90deg, transparent 0 72px, var(--stripe) 72px 144px);
+}
+
+/* Diagonal hatch for held / blocked slots. */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 6px,
+    color-mix(in oklab, currentColor 14%, transparent) 6px 7px
+  );
+}
+
+/* Net mesh for booked slots. */
+@utility net {
+  background-image:
+    repeating-linear-gradient(45deg, var(--line-strong) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, var(--line-strong) 0 1px, transparent 1px 9px);
+}
+
+/* Floodlight glow: four pylons washing the pitch from the corners. */
+@utility floodlights {
+  background-image:
+    radial-gradient(60% 55% at 8% -10%, var(--glow), transparent 70%),
+    radial-gradient(60% 55% at 92% -10%, var(--glow), transparent 70%),
+    radial-gradient(80% 60% at 50% 120%, var(--glow-2), transparent 70%);
+}
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+/* Scoreboard flip digits for the hold countdown. */
+.flip-digit {
+  perspective: 300px;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
