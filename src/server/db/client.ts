@@ -17,6 +17,13 @@ async function boot(): Promise<SqlClient> {
   }
   const { openPglite, migrateLocal } = await import("./pglite");
   const dir = env.localDbDir;
+  // Serverless file systems are read-only and per-instance, so an on-disk PGlite
+  // there loses bookings. Fail with a clear message instead of an EROFS error.
+  if (process.env.VERCEL && dir !== "memory") {
+    throw new Error(
+      "Local mode can't persist on Vercel. Set NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY and DATABASE_URL (or LOCAL_DB_DIR=memory for a throwaway demo).",
+    );
+  }
   if (dir !== "memory") await mkdir(dir, { recursive: true });
   const sql = await openPglite(dir);
   await migrateLocal(sql, { seed: true });

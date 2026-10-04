@@ -58,6 +58,7 @@ Why not `postgres_changes` on `bookings`: RLS rightly hides other users' rows, a
 ## D11 — Expired-hold cleanup
 Reads ignore expired holds; `create_hold` reclaims them on demand. A cleanup job (`release_expired_holds()`) marks them cancelled:
 `/api/cron/release-holds` (Bearer `CRON_SECRET`, wired in `vercel.json`) in production, and a 30-second in-process interval in local mode.
+The production job runs once a day (03:00 IST) because Vercel Hobby rejects more frequent crons. That's enough: correctness never depends on the job, which only tidies `held` rows into `cancelled`.
 
 ## D12 — Local auth adapter
 Without Supabase, magic link and Google sign-in use a local adapter: the "email" step issues an HMAC-signed, 10-minute single-use link, which local mode shows on screen (there is no mail server); "Continue with Google" signs in a demo Google identity.
@@ -89,3 +90,7 @@ Route handlers and server actions are separate bundles, so a provider stored on 
 
 ## D20 — Split payers don't need an account
 Anyone holding the split link can pay a seat (the link is the capability: a v4 UUID, 122 random bits). Seat claims are rate-limited per IP and a claimed seat is reserved for 10 minutes while its payment is in flight.
+
+## D21 — Hosting
+Vercel alone, in Supabase mode. Postgres, Auth and Realtime broadcast live in Supabase; every route is a stateless function. Local mode refuses to boot on Vercel (`VERCEL` is set) unless `LOCAL_DB_DIR=memory`, because an on-disk PGlite there is read-only and per-instance.
+Internal identifiers (cookie `pitchlab_session`, theme key `pitchlab-theme`, `PITCHLAB_TEST_HOOKS`, seed emails `@pitchlab.test`) follow the brand. `.test` is a reserved TLD, so the seed addresses can never reach a real inbox.
