@@ -148,6 +148,6 @@ describe("admin", () => {
   it("lists bookings with player emails", async () => {
     const rows = await repo.adminListBookings(actor(IDS.admin), { kind: "booking", status: "confirmed" });
     expect(rows.length).toBeGreaterThan(0);
-    expect(rows.some((r) => r.email === "kabir@nutmeg.arena")).toBe(true);
+    expect(rows.some((r) => r.email === "kabir@pitchlab.test")).toBe(true);
   });
 });

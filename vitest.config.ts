@@ -12,6 +12,6 @@ export default defineConfig({
     silent: false,
     testTimeout: 30_000,
     hookTimeout: 60_000,
-    env: { LOCAL_DB_DIR: "memory", NUTMEG_TEST_HOOKS: "0" },
+    env: { LOCAL_DB_DIR: "memory", PITCHLAB_TEST_HOOKS: "0" },
   },
 });

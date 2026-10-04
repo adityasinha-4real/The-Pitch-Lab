@@ -7,7 +7,7 @@ import { channels, publish } from "@/server/realtime/bus";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** DECISIONS D13: only exists when NUTMEG_TEST_HOOKS=1 (the Playwright server). */
+/** DECISIONS D13: only exists when PITCHLAB_TEST_HOOKS=1 (the Playwright server). */
 export async function POST(request: Request) {
   if (!env.testHooks) return NextResponse.json({ error: "not_found" }, { status: 404 });
   const body = z.object({ bookingId: z.uuid().optional() }).safeParse(await request.json().catch(() => ({})));

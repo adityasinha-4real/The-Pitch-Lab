@@ -35,7 +35,7 @@ test("hold expiry frees the slot for someone else", async ({ browser }) => {
 });
 
 test("test hooks are locked away from players", async ({ request }) => {
-  // The route exists only when NUTMEG_TEST_HOOKS=1 (this server); bad input is still rejected.
+  // The route exists only when PITCHLAB_TEST_HOOKS=1 (this server); bad input is still rejected.
   const res = await request.post("/api/test/expire-holds", { data: { bookingId: "not-a-uuid" } });
   expect(res.status()).toBe(400);
 });

@@ -28,9 +28,9 @@ export default defineConfig({
     env: {
       PORT: String(PORT),
       LOCAL_DB_DIR: "memory",
-      NUTMEG_TEST_HOOKS: "1",
+      PITCHLAB_TEST_HOOKS: "1",
       AUTH_SECRET: "e2e-only-secret-not-for-production-use-0123456789",
-      ADMIN_EMAILS: "admin@nutmeg.arena",
+      ADMIN_EMAILS: "admin@pitchlab.test",
       NEXT_PUBLIC_SUPABASE_URL: "",
       NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
       DATABASE_URL: "",

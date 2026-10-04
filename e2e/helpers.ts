@@ -4,7 +4,7 @@ let counter = 0;
 /** A fresh player email per call so tests don't share holds or bookings. */
 export const newEmail = (tag: string) => `${tag}-${Date.now().toString(36)}-${counter++}@e2e.test`;
 
-export const ADMIN = "admin@nutmeg.arena";
+export const ADMIN = "admin@pitchlab.test";
 
 /** Sign in through the real magic-link flow (local adapter shows the link on screen). */
 export async function login(page: Page, email: string, next = "/") {

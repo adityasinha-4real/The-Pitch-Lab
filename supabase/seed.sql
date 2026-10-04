@@ -10,10 +10,10 @@ $$;
 
 -- Players and the arena desk.
 insert into auth.users (id, instance_id, aud, role, email, email_confirmed_at, raw_user_meta_data) values
-  ('00000000-0000-4000-8000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nutmeg.arena', now(), '{"full_name": "Arena Desk"}'),
-  ('00000000-0000-4000-8000-000000000002', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'kabir@nutmeg.arena', now(), '{"full_name": "Kabir Mehta"}'),
-  ('00000000-0000-4000-8000-000000000003', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'meera@nutmeg.arena', now(), '{"full_name": "Meera Iyer"}'),
-  ('00000000-0000-4000-8000-000000000004', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'rohan@nutmeg.arena', now(), '{"full_name": "Rohan Das"}')
+  ('00000000-0000-4000-8000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@pitchlab.test', now(), '{"full_name": "Arena Desk"}'),
+  ('00000000-0000-4000-8000-000000000002', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'kabir@pitchlab.test', now(), '{"full_name": "Kabir Mehta"}'),
+  ('00000000-0000-4000-8000-000000000003', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'meera@pitchlab.test', now(), '{"full_name": "Meera Iyer"}'),
+  ('00000000-0000-4000-8000-000000000004', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'rohan@pitchlab.test', now(), '{"full_name": "Rohan Das"}')
 on conflict (id) do nothing;
 
 update public.profiles set role = 'admin' where id = '00000000-0000-4000-8000-000000000001';

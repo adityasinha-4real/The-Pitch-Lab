@@ -40,6 +40,6 @@ describe("seed", () => {
 
   it("seeds an admin", async () => {
     const rows = await sql.query<{ email: string }>("select email from public.profiles where role = 'admin'");
-    expect(rows.map((r) => r.email)).toEqual(["admin@nutmeg.arena"]);
+    expect(rows.map((r) => r.email)).toEqual(["admin@pitchlab.test"]);
   });
 });

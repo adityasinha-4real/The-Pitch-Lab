@@ -7,7 +7,7 @@ import type { PgError, SqlClient, SqlRunner } from "./sql";
  * seeds a fresh database; Supabase mode connects to DATABASE_URL.
  * Stored on globalThis so dev-server module reloads share one database.
  */
-const g = globalThis as unknown as { __nutmegSql?: Promise<SqlClient> };
+const g = globalThis as unknown as { __pitchlabSql?: Promise<SqlClient> };
 
 async function boot(): Promise<SqlClient> {
   const { env } = await import("../env");
@@ -24,16 +24,16 @@ async function boot(): Promise<SqlClient> {
 }
 
 export function getSql(): Promise<SqlClient> {
-  g.__nutmegSql ??= boot().catch((err) => {
-    g.__nutmegSql = undefined;
+  g.__pitchlabSql ??= boot().catch((err) => {
+    g.__pitchlabSql = undefined;
     throw err;
   });
-  return g.__nutmegSql;
+  return g.__pitchlabSql;
 }
 
 /** Tests inject their own client (a fresh PGlite per suite). */
 export function setSqlClient(client: SqlClient | undefined) {
-  g.__nutmegSql = client ? Promise.resolve(client) : undefined;
+  g.__pitchlabSql = client ? Promise.resolve(client) : undefined;
 }
 
 export type Actor = { id: string; email?: string | null } | null;

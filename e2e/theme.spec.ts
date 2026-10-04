@@ -32,7 +32,7 @@ test.describe("themes", () => {
 
     await page.getByTestId("theme-toggle").click();
     await expect(page.locator("html")).toHaveClass(/\blight\b/);
-    expect(await page.evaluate(() => localStorage.getItem("nutmeg-theme"))).toBe("light");
+    expect(await page.evaluate(() => localStorage.getItem("pitchlab-theme"))).toBe("light");
 
     await page.reload();
     expect(await page.evaluate(() => (window as unknown as { __firstTheme: string }).__firstTheme)).toMatch(/\blight\b/);

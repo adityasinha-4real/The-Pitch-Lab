@@ -54,4 +54,4 @@ Supabase (Auth via `@supabase/ssr`, Postgres, Realtime broadcast) · PGlite for 
 | `--danger` | `#FF6B5E` | `#B42318` |
 
 Type: `--font-display` Big Shoulders Display (headings, scoreboard numerals), `--font-body` Inter Tight.
-Theme: `next-themes` with `attribute="class"`, `defaultTheme="system"`, storage key `nutmeg-theme`.
+Theme: `next-themes` with `attribute="class"`, `defaultTheme="system"`, storage key `pitchlab-theme`.

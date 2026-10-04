@@ -62,10 +62,10 @@ Reads ignore expired holds; `create_hold` reclaims them on demand. A cleanup job
 ## D12 — Local auth adapter
 Without Supabase, magic link and Google sign-in use a local adapter: the "email" step issues an HMAC-signed, 10-minute single-use link, which local mode shows on screen (there is no mail server); "Continue with Google" signs in a demo Google identity.
 Sessions are HMAC-signed cookies (`AUTH_SECRET`, random per boot if unset).
-Admin role: `profiles.role = 'admin'`, seeded for `admin@nutmeg.arena`, and granted on sign-up to any email in `ADMIN_EMAILS`.
+Admin role: `profiles.role = 'admin'`, seeded for `admin@pitchlab.test`, and granted on sign-up to any email in `ADMIN_EMAILS`.
 
 ## D13 — Test hooks
-Waiting five real minutes in an e2e test is not acceptable, so with `NUTMEG_TEST_HOOKS=1` (set only by the Playwright web server) `/api/test/expire-holds` back-dates holds; the route returns 404 otherwise. The same flag exempts magic-link requests from the per-email rate limit, because the suite signs the seeded admin in more than five times in ten minutes.
+Waiting five real minutes in an e2e test is not acceptable, so with `PITCHLAB_TEST_HOOKS=1` (set only by the Playwright web server) `/api/test/expire-holds` back-dates holds; the route returns 404 otherwise. The same flag exempts magic-link requests from the per-email rate limit, because the suite signs the seeded admin in more than five times in ten minutes.
 
 ## D14 — Concurrency test
 `tests/db/concurrency.test.ts` fires two `create_hold` calls for the same slot from two users with `Promise.all` and asserts exactly one succeeds, printing the result.

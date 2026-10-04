@@ -7,7 +7,7 @@ import { env } from "../env";
 import * as repo from "../db/repo";
 import { issueToken, readToken } from "./tokens";
 
-export const SESSION_COOKIE = "nutmeg_session";
+export const SESSION_COOKIE = "pitchlab_session";
 const SESSION_TTL = 60 * 60 * 24 * 30;
 
 export type SessionUser = {

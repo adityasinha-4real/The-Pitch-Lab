@@ -3,7 +3,7 @@ import { env } from "@/server/env";
 import { startLocalSession, supabaseServer } from "@/server/auth";
 import { safeNext } from "@/server/auth/tokens";
 
-const LOCAL_GOOGLE_IDENTITY = { email: "google.player@nutmeg.arena", name: "Google Player" };
+const LOCAL_GOOGLE_IDENTITY = { email: "google.player@pitchlab.test", name: "Google Player" };
 
 /** "Continue with Google". Supabase OAuth, or a demo Google identity in local mode (DECISIONS D12). */
 export async function GET(request: NextRequest) {

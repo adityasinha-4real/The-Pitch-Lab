@@ -4,11 +4,11 @@ import { randomBytes } from "node:crypto";
 /** Runtime configuration. Mode is decided per process from the environment (DECISIONS D1). */
 export type DataMode = "supabase" | "local";
 
-const g = globalThis as unknown as { __nutmegAuthSecret?: string };
+const g = globalThis as unknown as { __pitchlabAuthSecret?: string };
 
 function bootSecret(): string {
-  g.__nutmegAuthSecret ??= randomBytes(32).toString("hex");
-  return g.__nutmegAuthSecret;
+  g.__pitchlabAuthSecret ??= randomBytes(32).toString("hex");
+  return g.__pitchlabAuthSecret;
 }
 
 export const env = {
@@ -38,7 +38,7 @@ export const env = {
     return process.env.AUTH_SECRET || bootSecret();
   },
   get adminEmails(): string[] {
-    return (process.env.ADMIN_EMAILS ?? "admin@nutmeg.arena")
+    return (process.env.ADMIN_EMAILS ?? "admin@pitchlab.test")
       .split(",")
       .map((e) => e.trim().toLowerCase())
       .filter(Boolean);
@@ -47,7 +47,7 @@ export const env = {
     return process.env.CRON_SECRET ?? "";
   },
   get testHooks() {
-    return process.env.NUTMEG_TEST_HOOKS === "1";
+    return process.env.PITCHLAB_TEST_HOOKS === "1";
   },
   get razorpay() {
     const keyId = process.env.RAZORPAY_KEY_ID ?? "";

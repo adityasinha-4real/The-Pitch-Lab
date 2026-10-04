@@ -2,7 +2,7 @@ import { createHmac } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { signPayload, verifySignature } from "@/server/payments/hmac";
 
-const secret = "whsec_test_nutmeg";
+const secret = "whsec_test_pitchlab";
 const body = JSON.stringify({ event: "payment.captured", payload: { payment: { entity: { id: "pay_1" } } } });
 
 describe("Razorpay webhook HMAC", () => {

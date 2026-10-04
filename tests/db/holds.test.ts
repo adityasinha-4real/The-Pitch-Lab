@@ -57,7 +57,7 @@ describe("holds", () => {
   });
 
   it("cleanup job releases expired holds and reports the turfs", async () => {
-    const uid = await createUser(sql, "cleanup@nutmeg.test");
+    const uid = await createUser(sql, "cleanup@pitchlab.test");
     const hold = await repo.createHold(actor(uid), IDS.panenkaYard, slotAt(4, 9));
     await repo.testExpireHolds(hold.id);
     const turfs = await repo.releaseExpiredHolds();

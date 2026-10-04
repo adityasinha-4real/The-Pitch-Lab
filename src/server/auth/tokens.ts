@@ -37,15 +37,15 @@ export function readToken<T extends object>(
   }
 }
 
-const used = globalThis as unknown as { __nutmegUsedLinks?: Map<string, number> };
+const used = globalThis as unknown as { __pitchlabUsedLinks?: Map<string, number> };
 
 /** Magic links are single use: remember nonces until they would have expired anyway. */
 export function consumeNonce(nonce: string, exp: number): boolean {
-  used.__nutmegUsedLinks ??= new Map();
+  used.__pitchlabUsedLinks ??= new Map();
   const now = Date.now() / 1000;
-  for (const [k, e] of used.__nutmegUsedLinks) if (e < now) used.__nutmegUsedLinks.delete(k);
-  if (used.__nutmegUsedLinks.has(nonce)) return false;
-  used.__nutmegUsedLinks.set(nonce, exp);
+  for (const [k, e] of used.__pitchlabUsedLinks) if (e < now) used.__pitchlabUsedLinks.delete(k);
+  if (used.__pitchlabUsedLinks.has(nonce)) return false;
+  used.__pitchlabUsedLinks.set(nonce, exp);
   return true;
 }
 

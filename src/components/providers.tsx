@@ -21,7 +21,7 @@ const RuntimeContext = createContext<RuntimeConfig>({
 
 export const useRuntime = () => useContext(RuntimeContext);
 
-export const THEME_STORAGE_KEY = "nutmeg-theme";
+export const THEME_STORAGE_KEY = "pitchlab-theme";
 
 export function Providers({ config, children }: { config: RuntimeConfig; children: React.ReactNode }) {
   return (

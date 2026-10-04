@@ -89,7 +89,7 @@ export class RazorpayProvider implements PaymentProvider {
 }
 
 type MockOrder = Order & { createdAt: number };
-const store = globalThis as unknown as { __nutmegMockOrders?: Map<string, MockOrder> };
+const store = globalThis as unknown as { __pitchlabMockOrders?: Map<string, MockOrder> };
 
 /**
  * Stand-in gateway when Razorpay keys are absent (DECISIONS D7). Keeps its own
@@ -101,12 +101,12 @@ export class MockPaymentProvider implements PaymentProvider {
   readonly webhookSecret: string;
 
   constructor(secretSeed: string) {
-    this.webhookSecret = createHmac("sha256", secretSeed).update("nutmeg-mock-webhook").digest("hex");
+    this.webhookSecret = createHmac("sha256", secretSeed).update("pitchlab-mock-webhook").digest("hex");
   }
 
   private get orders() {
-    store.__nutmegMockOrders ??= new Map();
-    return store.__nutmegMockOrders;
+    store.__pitchlabMockOrders ??= new Map();
+    return store.__pitchlabMockOrders;
   }
 
   async createOrder(input: { amountPaise: number; receipt: string; notes: Record<string, string> }): Promise<Order> {

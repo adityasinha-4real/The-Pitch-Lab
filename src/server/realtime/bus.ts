@@ -14,14 +14,14 @@ export const channels = {
 
 export const CHANNEL_PATTERN = /^(turf|booking|split):[A-Za-z0-9-]{1,64}$|^games$/;
 
-const g = globalThis as unknown as { __nutmegBus?: EventEmitter };
+const g = globalThis as unknown as { __pitchlabBus?: EventEmitter };
 
 function emitter(): EventEmitter {
-  if (!g.__nutmegBus) {
-    g.__nutmegBus = new EventEmitter();
-    g.__nutmegBus.setMaxListeners(0);
+  if (!g.__pitchlabBus) {
+    g.__pitchlabBus = new EventEmitter();
+    g.__pitchlabBus.setMaxListeners(0);
   }
-  return g.__nutmegBus;
+  return g.__pitchlabBus;
 }
 
 export async function publish(channel: string): Promise<void> {

@@ -12,7 +12,7 @@ pnpm exec playwright install chromium   # for e2e
 pnpm dev                                # http://localhost:3000
 ```
 
-With no environment variables it runs in **local mode**: the real Supabase migrations run in an embedded Postgres (PGlite), auth uses signed magic links shown on screen, and payments use a mock gateway that signs real HMAC webhooks. Sign in as `admin@nutmeg.arena` for the admin area.
+With no environment variables it runs in **local mode**: the real Supabase migrations run in an embedded Postgres (PGlite), auth uses signed magic links shown on screen, and payments use a mock gateway that signs real HMAC webhooks. Sign in as `admin@pitchlab.test` for the admin area.
 
 To run against Supabase and Razorpay, copy `.env.example` to `.env.local` and fill it in, apply `supabase/migrations` and `supabase/seed.sql` to your project, and point Razorpay's webhook at `/api/webhooks/razorpay`.
 

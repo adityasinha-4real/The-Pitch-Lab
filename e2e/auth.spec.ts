@@ -35,7 +35,7 @@ test.describe("auth", () => {
     await page.getByRole("link", { name: "Continue with Google" }).click();
     await expect(page.getByRole("button", { name: "Account menu" })).toBeVisible();
     await page.getByRole("button", { name: "Account menu" }).click();
-    await expect(page.getByText("google.player@nutmeg.arena")).toBeVisible();
+    await expect(page.getByText("google.player@pitchlab.test")).toBeVisible();
   });
 
   test("redirect: protected pages send you to sign in and back", async ({ page }) => {
